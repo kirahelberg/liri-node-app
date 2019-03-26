@@ -1,7 +1,6 @@
-//require("dotenv").config();
-var keys = require("./keys.js");
+var search = require("./search.js");
 var moment = require("moment");
-//var spotify = new Spotify(keys.spotify);
+require("dotenv").config();
 
 // Determines if we're searching for concert, spotify, movie
 if (process.argv[2]) {
@@ -18,7 +17,7 @@ var movieSearch = userSearch.slice(0, -1);
 
 //SEARCH FOR CONCERTS IN BANDS IN TOWN API
 if (searchQuery === "concert-this") {
-  keys.getConcert(artistSearch).then(function(response) {
+  search.getConcert(artistSearch).then(function(response) {
     for (var i = 0; i < response.data.length; i++) {
       console.log("Venue name: " + response.data[i].venue.name);
       console.log(
@@ -38,11 +37,18 @@ if (searchQuery === "concert-this") {
 }
 
 //SEARCH FOR SONG IN SPOTIFY
+if (searchQuery === "spotify-this-song") {
+  if (songSearch) {
+    console.log("search for song");
+  } else {
+    console.log("you didn't search for a song");
+  }
+}
 
 //SEARCH FOR MOVIE ON OMDB
 if (searchQuery === "movie-this") {
   if (movieSearch) {
-    keys.getMovie(movieSearch).then(function(response) {
+    search.getMovie(movieSearch).then(function(response) {
       console.log("Movie title: " + response.data.Title);
       console.log("Release year: " + response.data.Year);
       console.log("IMDB rating: " + response.data.imdbRating);
