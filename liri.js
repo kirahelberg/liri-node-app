@@ -14,6 +14,7 @@ for (var i = 3; i < process.argv.length; i++) {
 //New variable to search BANDS IN TOWN API
 var artistSearch = userSearch.slice(0, -1);
 var movieSearch = userSearch.slice(0, -1);
+var songSearch = userSearch.slice(0, -1);
 
 //SEARCH FOR CONCERTS IN BANDS IN TOWN API
 if (searchQuery === "concert-this") {
@@ -39,9 +40,23 @@ if (searchQuery === "concert-this") {
 //SEARCH FOR SONG IN SPOTIFY
 if (searchQuery === "spotify-this-song") {
   if (songSearch) {
-    console.log("search for song");
+    search
+      .getSong(songSearch)
+      .then(function(response) {
+        console.log(response.tracks.items[0]);
+        console.log("Artist: " + response.tracks.items[0].artists.name);
+        console.log("Song Name: " + response.tracks.items[0].name);
+        console.log("Album: " + response.tracks.items[0].album.name);
+        console.log(
+          "Click the link to preview the song: " +
+            response.tracks.items[0].external_urls.spotify
+        );
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   } else {
-    console.log("you didn't search for a song");
+    console.log("You didn't search for a song");
   }
 }
 

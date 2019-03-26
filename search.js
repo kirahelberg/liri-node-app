@@ -25,8 +25,6 @@ function getMovie(userSearch) {
   return axios.get(movieUrl);
 }
 
-getSong();
-
 module.exports = {
   getConcert: getConcert,
   getMovie: getMovie,
