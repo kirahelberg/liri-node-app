@@ -56,7 +56,21 @@ if (searchQuery === "spotify-this-song") {
         console.log(err);
       });
   } else {
-    console.log("You didn't search for a song");
+    search
+      .getDefaultSong()
+      .then(function(response) {
+        console.log(response.tracks.items[0]);
+        console.log("Artist: " + response.tracks.items[0].artists[0].name);
+        console.log("Song Name: " + response.tracks.items[0].name);
+        console.log("Album: " + response.tracks.items[0].album.name);
+        console.log(
+          "Click the link to preview the song: " +
+            response.tracks.items[0].external_urls.spotify
+        );
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   }
 }
 
@@ -80,5 +94,3 @@ if (searchQuery === "movie-this") {
     console.log("It's on Netflix!");
   }
 }
-
-//

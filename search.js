@@ -19,6 +19,14 @@ function getSong(userSearch) {
   );
 }
 
+function getDefaultSong() {
+  return spotify.request(
+    "https://api.spotify.com/v1/search?q=track:the+sign%20artist:ace+of+base&type=track&limit=10"
+  );
+}
+
+getDefaultSong();
+
 function getMovie(userSearch) {
   var movieUrl =
     "http://www.omdbapi.com/?t=" + userSearch + "&y=&plot=short&apikey=trilogy";
@@ -28,5 +36,6 @@ function getMovie(userSearch) {
 module.exports = {
   getConcert: getConcert,
   getMovie: getMovie,
-  getSong: getSong
+  getSong: getSong,
+  getDefaultSong: getDefaultSong
 };
