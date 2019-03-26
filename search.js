@@ -13,16 +13,10 @@ function getConcert(userSearch) {
   return axios.get(queryURL);
 }
 
-function getSong() {
-  spotify
-    .request(
-      "https://api.spotify.com/v1/search?q=" +
-        "bohemian+rhapsody" +
-        "&type=track"
-    )
-    .then(function(response) {
-      console.log(response);
-    });
+function getSong(userSearch) {
+  return spotify.request(
+    "https://api.spotify.com/v1/search?q=" + userSearch + "&type=track"
+  );
 }
 
 function getMovie(userSearch) {
@@ -31,10 +25,8 @@ function getMovie(userSearch) {
   return axios.get(movieUrl);
 }
 
-getSong();
-
 module.exports = {
   getConcert: getConcert,
-  getMovie: getMovie
-  //getSong: getSong
+  getMovie: getMovie,
+  getSong: getSong
 };
