@@ -1,6 +1,7 @@
 var search = require("./search.js");
 var moment = require("moment");
 require("dotenv").config();
+var fs = require("fs");
 
 // Determines if we're searching for concert, spotify, movie
 if (process.argv[2]) {
@@ -51,6 +52,7 @@ if (searchQuery === "spotify-this-song") {
           "Click the link to preview the song: " +
             response.tracks.items[0].external_urls.spotify
         );
+        console.log("\n---------------");
       })
       .catch(function(err) {
         console.log(err);
@@ -67,6 +69,7 @@ if (searchQuery === "spotify-this-song") {
           "Click the link to preview the song: " +
             response.tracks.items[0].external_urls.spotify
         );
+        console.log("\n---------------");
       })
       .catch(function(err) {
         console.log(err);
@@ -86,6 +89,7 @@ if (searchQuery === "movie-this") {
       console.log("Movie language: " + response.data.Language);
       console.log("Plot: " + response.data.Plot);
       console.log("Plot: " + response.data.Actors);
+      console.log("\n---------------");
     });
   } else {
     console.log(
@@ -93,4 +97,11 @@ if (searchQuery === "movie-this") {
     );
     console.log("It's on Netflix!");
   }
+}
+
+//DO WHAT IT SAYS
+if (searchQuery === "do-what-it-says") {
+  fs.readFile("random.txt", "utf8", function(err, data) {
+    console.log(data);
+  });
 }
